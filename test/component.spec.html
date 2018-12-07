@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- <script src="../bower_components/custom-elements/custom-elements.min.js"></script>
+  <script src="../bower_components/shadydom/shadydom.min.js"></script> -->
+  <script src="../node_modules/web-component-tester/browser.js"></script>
+  <script src="../dist/bundle.js"></script>
+</head>
+<body>
+
+  <change-me></change-me>
+
+  <script>
+    suite('<mini-form>', function() {
+      let component = document.querySelector('mini-form');
+      test('renders div', function() {
+        assert.isOk(component.querySelector('div'));
+      });
+    });
+  </script>
+  <script src="component.spec.js"></script>
+</body>
+</html>
