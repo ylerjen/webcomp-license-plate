@@ -1,13 +1,19 @@
 .l-p-wrapper {
     border: 1px solid black;
+    border-radius: 4px;
     box-shadow: 4px 4px 4px lightgrey;
     display: inline-flex;
+    align-items: center;
+    font-family: Arial;
+    font-weight: bold;
+    padding: 4px 8px;
 }
-.l-p-country-flag {
-    
+.l-p-country-flag svg {
+    height: 20px;
+    width: auto;    
 }
 .flag {
-    height: 50px;
+    margin: 0 4px;
 }
 .l-p-region {
 
