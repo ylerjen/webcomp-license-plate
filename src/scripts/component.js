@@ -1,3 +1,4 @@
+// @flow
 import componentDom from './../templates/component.html';
 import componentStyles from './../styles/component.scss';
 
@@ -6,6 +7,10 @@ function createTemplate() {
     tplWrapper.innerHTML = `<style>${componentStyles}</style>${componentDom}`;
     return tplWrapper;
 }
+
+const selectorRegion = '.l-p-region';
+const selectorRegionFlag = '.l-p-region-flag';
+const selectorNumber = '.l-p-number';
 
 /**
  * This is the LicensePlate webcomponent class that manage the 
@@ -20,6 +25,16 @@ export class LicensePlate extends HTMLElement {
     static get observedAttributes() { return ['region', 'number']; }
 
     /**
+     * @static
+     * Returns a list of acronyms that are the supported swiss regions 
+     */
+    static get supportedRegions() { return ['AG', 'AI', 'AR', 'BE', 'BL', 'BS', 'FR', 'GE', 'GL', 'GR', 'JU', 'LU', 'NE', 'NW', 'OW', 'SG', 'SH', 'SO', 'SZ', 'TG', 'TI', 'UR', 'VD', 'VS', 'ZG', 'ZH']; }
+
+    _number = 0;
+    _region = "AG";
+    _shadowRoot;
+
+    /**
      * Constructor of the class. It's called when an instance of the element is created or upgraded.
      * Useful for initializing state, settings up event listeners, or creating shadow dom.
      * See the spec for restrictions on what you can do in the constructor.
@@ -27,8 +42,8 @@ export class LicensePlate extends HTMLElement {
     constructor() {
         super();
         const content = createTemplate().content;
-        const shadowRoot = this.attachShadow({mode: 'open'});
-        shadowRoot.appendChild(content.cloneNode(true));
+        this._shadowRoot = this.attachShadow({mode: 'open'});
+        this._shadowRoot.appendChild(content.cloneNode(true));
         this.innerHTML = '<h1>I\'m your Web-Component.</h1><p>Change me in <code>src/scripts/component.js</code></p>';
     }
 
@@ -57,12 +72,37 @@ export class LicensePlate extends HTMLElement {
      * @see observedAttributes
      */
     attributeChangedCallback(attrName, oldVal, newVal) {
-
+        if (attrName === 'region') {
+            this.region = newVal;
+        } else if (attrName === 'number') {
+            this.number = newVal;
+        }
     }
 
-    get dummy() {
-        return 'woot';
+    set region(value) {
+        if (LicensePlate.supportedRegions.includes(value)) {
+            this._region = value;
+            const regionEl = this._shadowRoot.querySelector(selectorRegion);
+            regionEl.innerHTML = value;
+        }
     }
+
+    setRegionFlag(region) {        
+        var regionEl = this._shadowRoot.querySelector(selectorRegionFlag);
+        
+    }
+
+    set number(value) {
+        if (typeof value === 'string') {
+            value = +value;
+        }
+        if (typeof value !== 'number') {
+            return;
+        }
+        this._number = value;
+        const numberEl = this._shadowRoot.querySelector(selectorNumber);
+        numberEl.innerHTML = value;
+    }    
 }
   
 export function defineCustomElement() {
