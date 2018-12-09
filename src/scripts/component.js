@@ -1,6 +1,7 @@
 // @flow
 import componentDom from './../templates/component.html';
 import componentStyles from './../styles/component.scss';
+import { text } from '../../../../Library/Caches/typescript/3.1/node_modules/@types/body-parser';
 
 function createTemplate() {    
     const tplWrapper = document.createElement('template');    
@@ -53,7 +54,8 @@ export class LicensePlate extends HTMLElement {
      * Generally, you should try to delay work until this time.
      */
     connectedCallback() {
-
+        const textZone = this._shadowRoot.querySelector('.l-p-text-zone');
+        textZone.addEventListener('resize', evt => console.log(evt), false);
     }
 
     /**
@@ -79,17 +81,23 @@ export class LicensePlate extends HTMLElement {
         }
     }
 
+    adaptTextSize() {
+        if (textZone.getBoundingClientRect().width < textZone.offsetWidth) {
+            console.log('should grow');
+        }
+    }
+    
+    setRegionFlag(region) {        
+        const regionEl = this._shadowRoot.querySelector(selectorRegionFlag);
+        
+    }
+
     set region(value) {
         if (LicensePlate.supportedRegions.includes(value)) {
             this._region = value;
             const regionEl = this._shadowRoot.querySelector(selectorRegion);
             regionEl.innerHTML = value;
         }
-    }
-
-    setRegionFlag(region) {        
-        var regionEl = this._shadowRoot.querySelector(selectorRegionFlag);
-        
     }
 
     set number(value) {
@@ -106,6 +114,5 @@ export class LicensePlate extends HTMLElement {
 }
   
 export function defineCustomElement() {
-    // define the web component for a standard HTMLElement extension
     customElements.define('license-plate', LicensePlate);
 }

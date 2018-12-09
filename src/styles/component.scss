@@ -1,31 +1,55 @@
+* {
+    box-sizing: border-box;
+}
 .l-p-wrapper {
     border: 1px solid black;
-    border-radius: 4px;
+    border-radius: 10px;
     box-shadow: 4px 4px 4px lightgrey;
     display: inline-flex;
-    align-items: center;
+    justify-content: space-between;
     font-family: Arial;
     font-weight: bold;
-    padding: 4px 8px;
+    padding: .5em 1em;
+    width: 100%;
+    overflow: hidden;
+}
+span {
+    border: 1px solid red;
+}
+.l-p-text-zone {
+    font-size: 3em;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
 }
 .l-p-country-flag svg {
-    height: 20px;
-    width: auto;    
+    width: 100%;
+    height: auto;
 }
 .flag {
     margin: 0 4px;
+    width: 20%;
 }
 .l-p-region {
-
 }
 .l-p-dot-separator {
 
 }
 .l-p-number {
-
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 .l-p-region-flag {
-
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.l-p-region-flag img {
+    width: 100%;
+    height: auto;
 }
 
 .flag-vs {
