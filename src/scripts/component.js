@@ -21,13 +21,13 @@ const selectorNumber = '.l-p-number';
 export class LicensePlate extends HTMLElement {
     /**
      * @static
-     * Returns a list of observed attributes
+     * @returns a list of observed attributes
      */
     static get observedAttributes() { return ['region', 'number']; }
 
     /**
      * @static
-     * Returns a list of acronyms that are the supported swiss regions 
+     * @returns a list of acronyms that are the supported swiss regions 
      */
     static get supportedRegions() { return ['AG', 'AI', 'AR', 'BE', 'BL', 'BS', 'FR', 'GE', 'GL', 'GR', 'JU', 'LU', 'NE', 'NW', 'OW', 'SG', 'SH', 'SO', 'SZ', 'TG', 'TI', 'UR', 'VD', 'VS', 'ZG', 'ZH']; }
 
