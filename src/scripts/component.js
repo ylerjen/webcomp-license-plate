@@ -1,7 +1,6 @@
 // @flow
 import componentDom from './../templates/component.html';
 import componentStyles from './../styles/component.scss';
-import { text } from '../../../../Library/Caches/typescript/3.1/node_modules/@types/body-parser';
 
 function createTemplate() {    
     const tplWrapper = document.createElement('template');    
